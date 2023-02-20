@@ -1,17 +1,28 @@
-import classes from './MainNavigation.module.css';
+import classes from "./MainNavigation.module.css";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 function MainNavigation() {
-
+  const router = useRouter();
+  const clickHandler = () => {
+    router.push("/");
+  };
   return (
     <header className={classes.header}>
-      <div className={classes.logo}>React Meetups</div>
+      <div
+        className={classes.logo}
+        onClick={clickHandler}
+        style={{ cursor: "pointer" }}
+      >
+        Next Meetups
+      </div>
       <nav>
         <ul>
           <li>
-            <Link to='/'>All Meetups</Link>
+            <Link href="/">All Meetups</Link>
           </li>
           <li>
-            <Link to='/new-meetup'>Add New Meetup</Link>
+            <Link href="/new-meetup">Add New Meetup</Link>
           </li>
         </ul>
       </nav>

@@ -1,0 +1,8 @@
+{
+  "./dev/noop": [
+    {
+      "id": "./node_modules/.pnpm/next@10.0.6_w7o5yyljkiidx2s2nzb26ottzu/node_modules/next/dist/client/dev/noop.js",
+      "file": "static/chunks/0.js"
+    }
+  ]
+}
