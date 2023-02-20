@@ -9,6 +9,9 @@
 .next
 /.next
 
+.env.local
+
+
 # testing
 /coverage
 
