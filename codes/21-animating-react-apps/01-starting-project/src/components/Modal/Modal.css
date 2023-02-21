@@ -27,6 +27,30 @@
     animation: closeModal 0.4s ease-out forwards;
 }
 
+/* This enter, enter-active, exit, exit-active are the classes that are added to the Modal component when the Modal is opened or closed
+    We can use these classes to add animations to the Modal component with CSSTransition
+
+ */
+
+
+.fade-slide-enter {
+    opacity: 0;
+    transform: translateY(-100%);
+}
+
+.fade-slide-enter-active {
+    animation: openModal 0.4s ease-out forwards;
+}
+
+.fade-slide-exit {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fade-slide-exit-active {
+    animation: closeModal 0.4s ease-out forwards;
+}
+
 @keyframes openModal {
     0% {
         opacity: 0;
