@@ -40,7 +40,7 @@
     - [React Project with TypeScript & Context API](/codes/24-react-with-typescript/03-react-ts-w-context-api)
 
 
-## What ıs React? And why would we use it?
+## What is React? And why would we use it?
 
 React is a JavaScript library for building user interfaces. It is maintained by Facebook and a community of individual developers and companies.
 
