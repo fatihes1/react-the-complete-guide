@@ -1,70 +1,240 @@
-# Getting Started with Create React App
+# Introduction to React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## JS Refresher
 
-## Available Scripts
+### let & const
 
-In the project directory, you can run:
+Read more about `let`: [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let)
+Read more about `const`: [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const)
 
-### `npm start`
+`let` and `const` basically replace `var`. You use `let` instead of `var` and `const` instead of `var` if you don't want to reassign the variable. (Effectively turning it into a constant therefore).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### ES6 Arrow Functions
+Read more: [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Arrow functions are a different way of creating functions in JavaScript. Besides a shorter syntax, they offer advantages when it comes to keeping the scope of the `this` keyword.
 
-### `npm test`
+Arrow function syntax may look strange but it's actually simple.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```js
+function callMe(name) {
+	console.log(name);
+}
+```
 
-### `npm run build`
+which you could also write as:
+```js
+const callMe = function(name) {
+	console.log(name);
+}
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+becomes:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```js
+const callMe = (name) => {
+	console.log(name);
+}
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Important
 
-### `npm run eject`
+When having no arguments, you have to use empty parentheses in the function declaration:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```js
+const callMe = () => {
+	console.log('Fatih');
+}
+```
+When having exactly one argument, you may omit the parentheses:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```js
+const callMe = name => {
+	console.log(name);
+}
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+When just returning a value, you can use the following syntax:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```js
+const returnMe = name => name;
+```
 
-## Learn More
+That's equal to:
+```js
+const returnMe = name => {
+	return name;
+};
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Exports & Imports
+In React projects (and actually in all modern JavaScript projects), you split your code across multiple JavaScript files - so-called modules. You do this, to keep each file/ module focused and manageable. To still access functionality in another file, you need export (to make it available) and import (to get access) statements.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+You got two different types of export: default (unnamed) and named exports:
 
-### Code Splitting
+default : `export default ...;`
+named : `export const someData = ...;
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+You can import default exports like this:
 
-### Analyzing the Bundle Size
+`import someNameOfYourChoice from './path/to/file';`
+Surprisingly, `someNameOfYourChoice` is totally up to you.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+You can import named exports like this:
+`import { someData } from './path/to/file';`
 
-### Making a Progressive Web App
+A file can only contain one default and an unlimited amount of named exports. You can also mix the one default with any amount of named exports in one and the same file. When importing named exports, you can also import all named exports at once with the following syntax:
+`import * as upToYou from './path/to/file';`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+`upToYou` is-well- up to you and simply bundles all exported variables/functions in one JavaScript object. For example, if you `export const someData ) ...` (`path/to/file.js`) you can access it on the `upToYou` object with `upToYou.someData`.
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Classes
 
-### Deployment
+Classes are a feature which basically replace constructor functions and prototypes. You can define blueprints for JavaScript objects with them.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Like this:
 
-### `npm run build` fails to minify
+```js
+class Person {
+    constructor() {
+        this.name = 'Fatih';
+    }
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    printMyName() {
+        console.log(this.name);
+    }
+}
+
+
+const person = new Person();
+console.log(person.name); // Fatih
+```
+
+In the above example, not only the class but also a property of that class is defined. They syntax you see there is the 'old' syntax for defining properties.
+In modern JavaScript projects, you can also the following, more convenient way of defining class properties:
+
+```js
+ Class Person {
+	name = 'Fatih';
+}
+const person = new Person();
+console.log(person.name); // Fatih
+ 
+ ```
+
+### Spread & Rest Operators
+
+The spread and rest operators actually use the same syntax: ...
+
+Yes, that is the operator - just three dots. It's usage determines whether you're using it as the spread or rest operator.
+
+#### Using the Spread Operator
+
+The spread operator allows you to pull elements out of an array or object and gives you a standalone list of those elements.
+
+```js 
+const oldArray = [1, 2, 3];
+const newArray = [...oldArray, 4, 5]; // [1, 2, 3, 4, 5]
+```
+
+Here's the spread operator used on an object:
+
+```js
+cons oldObject = {
+	name: 'Fatih'
+};
+const newObject = {
+    ...oldObject,
+    age: 24
+};
+
+console.log(newObject); // {name: 'Fatih', age: 24}
+
+```
+The spread operator is extremely useful for cloning arrays and objects. Since both are reference types (and not primitives), copying them safely (i.e. preventing future mutation of the copied original) can be tricky. With the spread operator you have an easy way of creating a (shallow!) clone of the object or array.
+
+### Destructuring
+
+Destructuring allows you to easily access the values of arrays or objects and assign them to variables.
+
+```js
+
+const array = [1, 2, 3];
+const [a, b] = array;
+console.log(a); // 1
+console.log(b); // 2
+console.log(array); // [1, 2, 3]
+
+// With Ocj.
+
+const myObj = {name: 'Fatih', age: 24};
+const {name} = myObj;
+console.log(name); // Fatih
+console.log(age); // 24
+console.log(myObj); // {name: 'Fatih', age: 24}
+```
+
+Destructuring is very useful when working with function arguments. Consider this example:
+
+```js
+const printName = (personObj) => {
+    console.log(personObj.name);
+}
+printName({name: 'Fatih', age: 24}); // Fatih
+```
+Here, we only want to print the name in the function but we pass a complete person object to the function. Of course
+this is no issue but it forces us to call personObj.name inside of our function. We can condense this code with destructuring:
+
+```js
+const printName = ({name}) => {
+    console.log(name);	
+}
+
+printName({name: 'Fatih', age: 24}); // Fatih
+```
+
+We get the same result as above but we save some code. By destructuring, we simply pull out the name property and  store it in a variable/ argument named name which we then can use in the function body.
+
+
+## React Basics
+
+HTML, CSS & JavaScript are about building user interfaces as well.
+React makes building complex, interactive and reactive user interfaces simpler.
+React is all about "Components"
+
+### Components
+React is all about components. Because all user interfaces in the end are made up of components
+
+Why Components?
+-  Reusability: Do not repeat yourself. Build components once and use them everywhere.
+-  Separation of Concerns: Divide your UI into independent, reusable pieces, and think about each piece in isolation.
+
+*Split big chunks of code into multiple smaller functions*
+
+### React & Components
+React allows you to create re-usable and reactive components consisting of HTML, CSS and JavaScript.
+Define the desired target states(s) and let React figure out the actual JavaScript DOM instructions to get there.
+
+### JSC = "HTML in JavaScript"
+
+```js
+<p title ="Intro text">This is a paragraph</p>
+```
+"Syntactic Sugar" - JavaScript code that is written to look like something else.
+
+```js
+React.createElement('p', {title: 'Intro text'}, 'This is a paragraph');
+```
+Real JavaScript code, would run in the browser like this. Not nice to use for more complex than 'HTML code'.
+
+
+### Props are 'attributes' of your 'custom HTML elements'
+
+Passing Data via Props
+
+![NGuCIg9yRA](https://user-images.githubusercontent.com/54971670/220861320-c11e68e3-d94b-4860-87bd-e30d21b90170.png)
+
+
+
+
